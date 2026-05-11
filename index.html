@@ -1,0 +1,942 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Projection IA - Super-intelligence, singularite et gouvernance</title>
+  <style>
+    :root {
+      --bg: #090b10;
+      --ink: #f7f1e7;
+      --muted: #a8adb8;
+      --line: rgba(247, 241, 231, 0.18);
+      --red: #ff5b4f;
+      --amber: #f0b84f;
+      --blue: #78a6ff;
+      --green: #74d49b;
+      --panel: rgba(14, 17, 25, 0.78);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+    }
+
+    a { color: inherit; }
+
+    .hero {
+      min-height: 96svh;
+      position: relative;
+      display: grid;
+      align-items: end;
+      padding: 42px clamp(22px, 5vw, 72px) 64px;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(9, 11, 16, 0.92) 0%, rgba(9, 11, 16, 0.66) 42%, rgba(9, 11, 16, 0.38) 100%),
+        url("https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=1800&q=80") center / cover;
+      z-index: -2;
+      transform: scale(1.04);
+      animation: slowZoom 18s ease-in-out infinite alternate;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0));
+      z-index: -1;
+    }
+
+    .eyebrow {
+      color: var(--red);
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      font-size: 12px;
+      text-transform: uppercase;
+      margin: 0 0 18px;
+    }
+
+    h1 {
+      font-size: clamp(46px, 8vw, 112px);
+      line-height: 0.92;
+      margin: 0;
+      max-width: 980px;
+      letter-spacing: 0;
+    }
+
+    .hero-copy {
+      margin: 28px 0 0;
+      max-width: 760px;
+      color: rgba(247,241,231,0.82);
+      font-size: clamp(18px, 2vw, 25px);
+      line-height: 1.35;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .btn {
+      border: 1px solid rgba(247,241,231,0.24);
+      padding: 13px 18px;
+      min-height: 48px;
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 750;
+      background: rgba(247,241,231,0.08);
+      backdrop-filter: blur(10px);
+      transition: transform .2s ease, background .2s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); background: rgba(247,241,231,0.16); }
+
+    .wrap {
+      width: min(1180px, calc(100% - 44px));
+      margin: 0 auto;
+    }
+
+    section {
+      padding: 86px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.8fr) minmax(280px, 1fr);
+      gap: 56px;
+      align-items: end;
+      margin-bottom: 48px;
+    }
+
+    h2 {
+      font-size: clamp(34px, 5vw, 66px);
+      line-height: 0.98;
+      margin: 0;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 18px;
+      margin: 0;
+    }
+
+    .facts {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .fact {
+      border-top: 3px solid var(--red);
+      padding-top: 18px;
+      min-height: 180px;
+    }
+
+    .fact:nth-child(2) { border-color: var(--blue); }
+    .fact:nth-child(3) { border-color: var(--amber); }
+    .fact strong {
+      display: block;
+      font-size: 24px;
+      line-height: 1.05;
+      margin-bottom: 14px;
+    }
+    .fact p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+
+    .timeline {
+      position: relative;
+      display: grid;
+      gap: 18px;
+      padding-left: 28px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 8px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(var(--red), var(--blue), var(--amber), var(--green));
+    }
+
+    .event {
+      position: relative;
+      display: grid;
+      grid-template-columns: 130px minmax(0, 1fr) 170px;
+      gap: 24px;
+      align-items: start;
+      padding: 22px 0 24px;
+      border-bottom: 1px solid var(--line);
+      cursor: pointer;
+    }
+
+    .event::before {
+      content: "";
+      position: absolute;
+      left: -27px;
+      top: 29px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--ink);
+      box-shadow: 0 0 0 6px rgba(255,91,79,0.14);
+    }
+
+    .year {
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--ink);
+    }
+
+    .event h3 {
+      margin: 0 0 9px;
+      font-size: 26px;
+      line-height: 1.08;
+    }
+
+    .event p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.48;
+      max-width: 720px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .chip {
+      border: 1px solid var(--line);
+      color: rgba(247,241,231,0.78);
+      padding: 6px 8px;
+      font-size: 11px;
+      font-weight: 750;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .source-link {
+      display: inline-block;
+      margin-top: 14px;
+      color: var(--ink);
+      text-decoration-color: rgba(255,91,79,0.72);
+      font-size: 13px;
+      font-weight: 800;
+      position: relative;
+      z-index: 3;
+      padding: 8px 10px;
+      border: 1px solid rgba(255,91,79,0.34);
+      background: rgba(255,91,79,0.08);
+      text-decoration: none;
+      pointer-events: auto;
+    }
+
+    .source-link + .source-link { margin-left: 14px; }
+
+    .source-link.demo {
+      color: var(--amber);
+      border-color: rgba(240,184,79,0.42);
+      background: rgba(240,184,79,0.08);
+    }
+
+    .source-link:hover {
+      background: rgba(255,91,79,0.16);
+      transform: translateY(-1px);
+    }
+
+    .source-link.demo:hover {
+      background: rgba(240,184,79,0.16);
+    }
+
+    .tag {
+      justify-self: start;
+      border: 1px solid var(--line);
+      color: var(--ink);
+      padding: 8px 10px;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .projection {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 44px;
+      align-items: center;
+    }
+
+    .curve {
+      min-height: 390px;
+      position: relative;
+      border-left: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background:
+        linear-gradient(180deg, transparent 0 24%, rgba(255,255,255,0.04) 24% 25%, transparent 25% 49%, rgba(255,255,255,0.04) 49% 50%, transparent 50% 74%, rgba(255,255,255,0.04) 74% 75%, transparent 75%),
+        linear-gradient(90deg, transparent 0 24%, rgba(255,255,255,0.04) 24% 25%, transparent 25% 49%, rgba(255,255,255,0.04) 49% 50%, transparent 50% 74%, rgba(255,255,255,0.04) 74% 75%, transparent 75%);
+    }
+
+    .curve svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    .axis {
+      position: absolute;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 750;
+    }
+    .axis.x { right: 0; bottom: -26px; }
+    .axis.y { left: -18px; top: -28px; }
+
+    .scenario-list {
+      display: grid;
+      gap: 22px;
+    }
+
+    .dashboard-stage {
+      min-height: 520px;
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.045), transparent 38%),
+        rgba(255,255,255,0.03);
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .dashboard-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+
+    .dashboard-title strong {
+      font-size: 18px;
+      color: var(--ink);
+    }
+
+    .pulse-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--red);
+      box-shadow: 0 0 0 0 rgba(255,91,79,0.7);
+      animation: pulse 1.8s infinite;
+    }
+
+    .bottleneck-steps {
+      display: grid;
+      gap: 18px;
+      margin-top: 8px;
+    }
+
+    .step-row {
+      display: grid;
+      grid-template-columns: 150px 1fr 82px;
+      align-items: center;
+      gap: 18px;
+      min-height: 70px;
+      border-top: 1px solid var(--line);
+      padding-top: 16px;
+    }
+
+    .step-name {
+      color: var(--ink);
+      font-size: 18px;
+      font-weight: 900;
+      line-height: 1.08;
+    }
+
+    .step-note {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .step-bar {
+      height: 22px;
+      background: rgba(247,241,231,0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .step-fill {
+      height: 100%;
+      width: 0%;
+      background: var(--blue);
+      transition: width 1.4s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .step-row:nth-child(2) .step-fill { background: var(--green); transition-duration: 1.55s; }
+    .step-row:nth-child(3) .step-fill { background: var(--amber); transition-duration: 1.75s; }
+    .step-row:nth-child(4) .step-fill { background: var(--red); transition-duration: 2.1s; }
+
+    .step-time {
+      color: var(--ink);
+      font-weight: 950;
+      font-size: 20px;
+      text-align: right;
+    }
+
+    .step-time small {
+      display: block;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-top: 3px;
+    }
+
+    .bottleneck-summary {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      margin-top: 28px;
+    }
+
+    .summary-cell {
+      background: #11151f;
+      padding: 16px;
+      min-height: 110px;
+    }
+
+    .summary-cell strong {
+      display: block;
+      font-size: 29px;
+      color: var(--ink);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .summary-cell span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .dashboard-caption {
+      margin: 30px 0 0;
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .bottleneck-left {
+      border-top: 1px solid var(--line);
+      margin-top: 34px;
+      padding-top: 22px;
+    }
+
+    .bottleneck-left strong {
+      display: block;
+      color: var(--ink);
+      font-size: 22px;
+      margin-bottom: 14px;
+    }
+
+    .bottleneck-left ul {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 16px;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(255,91,79,0.7); }
+      70% { box-shadow: 0 0 0 12px rgba(255,91,79,0); }
+      100% { box-shadow: 0 0 0 0 rgba(255,91,79,0); }
+    }
+
+    .scenario {
+      border-left: 3px solid var(--blue);
+      padding-left: 18px;
+    }
+    .scenario:nth-child(2) { border-color: var(--amber); }
+    .scenario:nth-child(3) { border-color: var(--red); }
+    .scenario strong { display: block; font-size: 22px; margin-bottom: 6px; }
+    .scenario span { color: var(--muted); line-height: 1.45; display: block; }
+
+    .matrix {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+    }
+
+    .cell {
+      min-height: 170px;
+      background: var(--bg);
+      padding: 20px;
+    }
+
+    .cell strong {
+      display: block;
+      color: var(--ink);
+      font-size: 19px;
+      margin-bottom: 14px;
+    }
+
+    .cell span {
+      color: var(--muted);
+      line-height: 1.45;
+      display: block;
+    }
+
+    .sources {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px 28px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .sources a { color: var(--ink); text-decoration-color: rgba(247,241,231,0.28); }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      place-items: center;
+      padding: 24px;
+      background: rgba(0,0,0,0.72);
+      z-index: 10;
+    }
+
+    .modal.open { display: grid; }
+
+    .modal-body {
+      width: min(760px, 100%);
+      background: #11151f;
+      border: 1px solid var(--line);
+      padding: 34px;
+      box-shadow: 0 24px 70px rgba(0,0,0,0.5);
+    }
+
+    .modal-body h3 { font-size: 32px; margin: 0 0 16px; }
+    .modal-body p { color: var(--muted); line-height: 1.55; font-size: 17px; }
+    .close {
+      float: right;
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--line);
+      width: 38px;
+      height: 38px;
+      cursor: pointer;
+    }
+
+    @keyframes slowZoom {
+      from { transform: scale(1.04); }
+      to { transform: scale(1.1); }
+    }
+
+    @media (max-width: 860px) {
+      .section-head,
+      .projection { grid-template-columns: 1fr; }
+      .facts,
+      .matrix,
+      .sources { grid-template-columns: 1fr; }
+      .event { grid-template-columns: 1fr; gap: 10px; }
+      .tag { justify-self: start; }
+      section { padding: 64px 0; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <h1>Timeline Intelligence Artificielle</h1>
+      <p class="hero-copy">Du premier choc des GANs en 2014 a GPT-5, aux agents autonomes, a la super-intelligence et a l'horizon de singularite 2045.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#timeline">Voir la projection</a>
+        <a class="btn" href="#message">Message a presenter</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Du contenu artificiel a la super-intelligence</h2>
+          <p class="lead">La progression n'est pas lineaire: generation d'images, langage, multimodalite, agents, puis systemes capables de prendre en charge des projets. La question devient: jusqu'ou deleguer, et sous quel controle ?</p>
+        </div>
+        <div class="facts">
+          <div class="fact">
+            <strong>2014-2019: creer</strong>
+            <p>GANs, StyleGAN et generation photo-realiste rendent visible la capacite des reseaux a produire du contenu synthetique credible.</p>
+          </div>
+          <div class="fact">
+            <strong>2017-2024: comprendre</strong>
+            <p>Transformers, BERT, GPT, CLIP, ChatGPT et GPT-4o font converger texte, image, voix, code et raisonnement.</p>
+          </div>
+          <div class="fact">
+            <strong>2025-2045: agir</strong>
+            <p>GPT-5 et les agents changent le sujet: l'IA ne repond plus seulement, elle planifie, execute et peut devenir une infrastructure de decision.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="timeline">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Timeline: 2014 a 2045</h2>
+          <p class="lead">La premiere partie est historique et verifiable. La seconde partie est une projection: utile pour reflechir, mais a presenter comme scenario, pas comme certitude.</p>
+        </div>
+        <div class="timeline">
+          <article class="event" data-title="2014 - GANs" data-detail="Les GANs introduisent une idee simple et puissante: deux reseaux s'affrontent. Le generateur tente de produire du contenu credible, le discriminateur tente de detecter le faux. Cette dynamique lance une nouvelle etape dans la generation d'images et de contenu artificiel.">
+            <div class="year">2014</div>
+            <div>
+              <h3>Generative Adversarial Networks (GANs)</h3>
+              <p>Revolution dans la generation de contenu artificiel. Deux reseaux s'affrontent: un generateur et un discriminateur.</p>
+              <div class="chips"><span class="chip">Deep Learning</span><span class="chip">Generation d'images</span><span class="chip">Recherche fondamentale</span></div>
+              <a class="source-link" href="https://arxiv.org/pdf/1406.2661" target="_blank" rel="noreferrer">Article original GANs -> PDF</a>
+            </div>
+            <span class="tag">REV</span>
+          </article>
+          <article class="event" data-title="2017 - Transformers" data-detail="Le papier 'Attention Is All You Need' introduit l'architecture Transformer. L'attention permet de mieux traiter le contexte et de parallelliser l'entrainement, ce qui ouvre la voie aux grands modeles de langage modernes.">
+            <div class="year">2017</div>
+            <div>
+              <h3>Transformers: "Attention Is All You Need"</h3>
+              <p>Architecture revolutionnaire de Google: le mecanisme d'attention change le NLP et devient la base des LLM modernes.</p>
+              <div class="chips"><span class="chip">NLP</span><span class="chip">Transformer</span><span class="chip">Mecanisme d'attention</span></div>
+              <a class="source-link" href="https://arxiv.org/pdf/1706.03762" target="_blank" rel="noreferrer">Lien direct -> Attention Is All You Need</a>
+            </div>
+            <span class="tag">REV</span>
+          </article>
+          <article class="event" data-title="2018 - Large Models" data-detail="BERT et GPT-1 popularisent le pre-training a grande echelle. Le modele apprend d'abord sur beaucoup de texte, puis il est adapte a des taches specifiques ou utilise comme base generative.">
+            <div class="year">2018</div>
+            <div>
+              <h3>Avenement des Large Models</h3>
+              <p>BERT et GPT-1 marquent le debut de l'ere des modeles pre-entraines a grande echelle.</p>
+              <div class="chips"><span class="chip">BERT - Google</span><span class="chip">GPT-1 - OpenAI</span><span class="chip">Pre-training</span><span class="chip">Transfer Learning</span></div>
+              <a class="source-link" href="https://arxiv.org/pdf/1810.04805" target="_blank" rel="noreferrer">BERT -> PDF</a>
+              <a class="source-link" href="https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf" target="_blank" rel="noreferrer">GPT-1 -> PDF OpenAI</a>
+            </div>
+            <span class="tag">MAJ</span>
+          </article>
+          <article class="event" data-title="2019 - StyleGAN" data-detail="StyleGAN montre un controle plus fin du style et une qualite photo-realiste. Les images synthetiques deviennent beaucoup plus difficiles a distinguer visuellement.">
+            <div class="year">2019</div>
+            <div>
+              <h3>Advanced GANs - StyleGAN</h3>
+              <p>Controle precis du style et qualite photo-realiste. Les deepfakes deviennent un sujet de confiance et de verification.</p>
+              <div class="chips"><span class="chip">StyleGAN</span><span class="chip">Photo-realisme</span><span class="chip">Controle de style</span></div>
+              <a class="source-link" href="https://arxiv.org/pdf/1812.04948" target="_blank" rel="noreferrer">StyleGAN -> PDF</a>
+              <a class="source-link demo" href="https://thispersondoesnotexist.com/" target="_blank" rel="noreferrer">Demo -> This Person Does Not Exist</a>
+            </div>
+            <span class="tag">MAJ</span>
+          </article>
+          <article class="event" data-title="2020 - GPT-3" data-detail="GPT-3, avec 175 milliards de parametres, montre que le passage a l'echelle produit des capacites few-shot: le modele peut accomplir certaines taches avec quelques exemples seulement.">
+            <div class="year">2020</div>
+            <div>
+              <h3>GPT-3: premier choc LLM conversationnel</h3>
+              <p>OpenAI publie un modele de 175 milliards de parametres. Le few-shot learning rend l'IA plus flexible et plus facile a utiliser.</p>
+              <div class="chips"><span class="chip">175B parametres</span><span class="chip">Few-shot learning</span><span class="chip">Conversation naturelle</span></div>
+              <a class="source-link" href="https://arxiv.org/pdf/2005.14165" target="_blank" rel="noreferrer">GPT-3 -> PDF</a>
+            </div>
+            <span class="tag">REV</span>
+          </article>
+          <article class="event" data-title="2021 - Vision + langage" data-detail="CLIP relie texte et image via supervision en langage naturel. DALL-E montre qu'un modele peut produire des images a partir de descriptions. La multimodalite devient centrale.">
+            <div class="year">2021</div>
+            <div>
+              <h3>Vision Transformers - CLIP & DALL-E</h3>
+              <p>Convergence vision-texte: comprendre les images via le langage et generer des images depuis des descriptions.</p>
+              <div class="chips"><span class="chip">Vision Transformers</span><span class="chip">Multimodalite</span><span class="chip">Generation d'images</span></div>
+              <a class="source-link" href="https://arxiv.org/pdf/2103.00020" target="_blank" rel="noreferrer">CLIP -> PDF</a>
+              <a class="source-link" href="https://arxiv.org/pdf/2102.12092" target="_blank" rel="noreferrer">DALL-E -> PDF</a>
+              <a class="source-link demo" href="https://openai.com/index/dall-e/" target="_blank" rel="noreferrer">Demo DALL-E -> OpenAI</a>
+            </div>
+            <span class="tag">MAJ</span>
+          </article>
+          <article class="event" data-title="2022 - ChatGPT mainstream" data-detail="ChatGPT transforme les LLM en produit grand public. La rupture n'est pas seulement technique: c'est l'adoption massive, la conversation naturelle et l'integration dans le quotidien.">
+            <div class="year">2022</div>
+            <div>
+              <h3>ChatGPT: l'IA devient mainstream</h3>
+              <p>GPT-3.5 optimise pour la conversation. ChatGPT atteint 100 millions d'utilisateurs mensuels en environ deux mois selon UBS/Similarweb.</p>
+              <div class="chips"><span class="chip">ChatGPT</span><span class="chip">DALL-E 2</span><span class="chip">RLHF</span><span class="chip">Adoption massive</span></div>
+              <a class="source-link" href="https://openai.com/index/chatgpt/" target="_blank" rel="noreferrer">ChatGPT -> OpenAI</a>
+              <a class="source-link" href="https://time.com/6253615/chatgpt-fastest-growing/" target="_blank" rel="noreferrer">100M utilisateurs -> TIME</a>
+            </div>
+            <span class="tag">REV</span>
+          </article>
+          <article class="event" data-title="2023 - Course a l'IA generative" data-detail="GPT-4 montre un saut en raisonnement et multimodalite. En parallele, Llama 2, Gemini, Claude 2, Midjourney et Stable Diffusion rendent l'ecosysteme plus concurrentiel et plus accessible.">
+            <div class="year">2023</div>
+            <div>
+              <h3>Course a l'IA generative</h3>
+              <p>GPT-4, Llama 2, Gemini, Claude 2, Midjourney V5 et Stable Diffusion accelerent la competition et la democratisation.</p>
+              <div class="chips"><span class="chip">GPT-4</span><span class="chip">Claude 2</span><span class="chip">Gemini</span><span class="chip">Llama 2</span><span class="chip">Midjourney V5</span></div>
+              <a class="source-link" href="https://arxiv.org/pdf/2303.08774" target="_blank" rel="noreferrer">GPT-4 -> PDF</a>
+              <a class="source-link" href="https://about.fb.com/news/2023/07/llama-2/" target="_blank" rel="noreferrer">Llama 2 -> Meta</a>
+              <a class="source-link demo" href="https://midjourney.com/" target="_blank" rel="noreferrer">Demo image -> Midjourney</a>
+            </div>
+            <span class="tag">MAJ</span>
+          </article>
+          <article class="event" data-title="2024 - IA agentique et multimodale" data-detail="GPT-4o rend l'interaction audio, image et texte plus naturelle. Claude 3.5 Sonnet renforce le raisonnement et les usages professionnels. Les agents commencent a utiliser des outils et a executer des taches complexes.">
+            <div class="year">2024</div>
+            <div>
+              <h3>IA agentique et multimodale</h3>
+              <p>GPT-4o, Claude 3.5 Sonnet et les premiers agents rendent l'IA plus native dans les workflows: voix, image, code, outils.</p>
+              <div class="chips"><span class="chip">GPT-4o</span><span class="chip">Claude 3.5 Sonnet</span><span class="chip">IA agentique</span><span class="chip">Multimodalite native</span></div>
+              <a class="source-link" href="https://openai.com/index/gpt-4o-and-more-tools-to-chatgpt-free/" target="_blank" rel="noreferrer">GPT-4o -> OpenAI</a>
+              <a class="source-link" href="https://www.anthropic.com/news/claude-3-5-sonnet" target="_blank" rel="noreferrer">Claude 3.5 Sonnet -> Anthropic</a>
+              <a class="source-link demo" href="https://openai.com/index/hello-gpt-4o/" target="_blank" rel="noreferrer">Demo GPT-4o -> OpenAI</a>
+            </div>
+            <span class="tag">MAJ</span>
+          </article>
+          <article class="event" data-title="2025 - GPT-5" data-detail="Projection/actualite post-GPT-5: le modele devient moins un outil de chat qu'un systeme de travail, capable de mieux raisonner, planifier, coder et traiter plusieurs formats. Le risque principal devient la delegation sans controle.">
+            <div class="year">2025</div>
+            <div>
+              <h3>GPT-5 et modeles de nouvelle generation</h3>
+              <p>Saut qualitatif dans le raisonnement complexe, la planification multi-etapes, le code, la multimodalite et la resolution de problemes avances.</p>
+              <div class="chips"><span class="chip">Raisonnement expert</span><span class="chip">Planification</span><span class="chip">Contexte etendu</span><span class="chip">Multimodalite temps reel</span></div>
+              <a class="source-link" href="https://openai.com/index/introducing-gpt-5/" target="_blank" rel="noreferrer">GPT-5 -> OpenAI</a>
+            </div>
+            <span class="tag">5.0</span>
+          </article>
+          <article class="event" data-title="2026 - Agents autonomes specialises" data-detail="Projection: les agents deviennent specialises par secteur. Ils coordonnent des taches, utilisent des outils, consultent des fichiers et produisent des livrables. Pour l'entreprise, l'enjeu devient l'orchestration et l'audit.">
+            <div class="year">2026</div>
+            <div>
+              <h3>Agents autonomes specialises</h3>
+              <p>Deploiement massif d'agents IA specialises par secteur, avec coordination automatique et collaboration inter-agents.</p>
+              <div class="chips"><span class="chip">Agents sectoriels</span><span class="chip">Orchestration multi-agents</span><span class="chip">Apprentissage continu</span><span class="chip">Integration SI</span></div>
+              <a class="source-link" href="https://darioamodei.com/essay/machines-of-loving-grace" target="_blank" rel="noreferrer">Projection "powerful AI" -> Dario Amodei</a>
+            </div>
+            <span class="tag">AGT</span>
+          </article>
+          <article class="event" data-title="2027 - AGI pratique" data-detail="Projection: on ne parle pas necessairement d'une AGI philosophique, mais d'une AGI pratique: des systemes equivalents a des experts humains dans beaucoup de taches intellectuelles. Le point critique devient la responsabilite: qui valide les decisions ?">
+            <div class="year">2027</div>
+            <div>
+              <h3>Transition vers l'AGI pratique</h3>
+              <p>Capacites cognitives proches d'experts humains dans de nombreuses taches intellectuelles, avec adaptation contextuelle et innovation assistee.</p>
+              <div class="chips"><span class="chip">Expertise multi-domaines</span><span class="chip">Innovation autonome</span><span class="chip">Adaptation contextuelle</span><span class="chip">Impact transformationnel</span></div>
+              <a class="source-link" href="https://www.anthropic.com/research/alignment-faking" target="_blank" rel="noreferrer">Risque a surveiller -> alignment faking</a>
+            </div>
+            <span class="tag">AGI</span>
+          </article>
+          <article class="event" data-title="2045 - Singularite selon Kurzweil" data-detail="Ray Kurzweil popularise 2045 comme horizon possible de singularite. A presenter comme une hypothese prospective: fusion homme-machine, intelligence non biologique amplifiee, rupture progressive ou invisible.">
+            <div class="year">2045</div>
+            <div>
+              <h3>Singularite: rupture ou processus invisible ?</h3>
+              <p>Horizon popularise par Ray Kurzweil: la frontiere homme-machine devient floue et l'intelligence non biologique pourrait depasser massivement l'humain.</p>
+              <div class="chips"><span class="chip">Kurzweil</span><span class="chip">Transhumanisme</span><span class="chip">Fusion homme-machine</span><span class="chip">Super-intelligence</span></div>
+              <a class="source-link" href="https://www.scientificamerican.com/article/would-you-live-forever-if-you-could/" target="_blank" rel="noreferrer">Reference article Kurzweil 2045 -> Scientific American</a>
+              <a class="source-link" href="https://www.britannica.com/technology/singularity-technology" target="_blank" rel="noreferrer">Contexte singularite -> Britannica</a>
+            </div>
+            <span class="tag">HORIZON</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap projection">
+        <div>
+          <p class="eyebrow">Projection lisible</p>
+          <h2>Le vrai goulot: la vitesse de decision</h2>
+          <p class="lead" style="margin-top:22px">Le risque n'est pas que l'IA reponde vite. Le risque est que l'organisation valide lentement pendant que les agents peuvent analyser, comparer et executer en continu.</p>
+          <div class="bottleneck-left">
+            <strong>Lecture a presenter</strong>
+            <ul>
+              <li>L'IA peut produire une analyse en secondes ou minutes.</li>
+              <li>La verification humaine prend souvent des heures.</li>
+              <li>La validation organisationnelle prend souvent des jours.</li>
+              <li>Donc le sujet devient: droits, audit trail, seuils d'autonomie et stop rules.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="dashboard-stage" aria-label="Dashboard anime du goulot de decision">
+          <div class="dashboard-title">
+            <strong>Decision bottleneck simulator</strong>
+            <span class="pulse-dot" aria-hidden="true"></span>
+          </div>
+          <div class="bottleneck-steps">
+            <div class="step-row">
+              <div><span class="step-name">Generation IA</span><span class="step-note">analyse, synthese, code</span></div>
+              <div class="step-bar"><div class="step-fill" data-width="14"></div></div>
+              <div class="step-time"><span data-count="2">0</span> min<small>ordre de grandeur</small></div>
+            </div>
+            <div class="step-row">
+              <div><span class="step-name">Verification</span><span class="step-note">sources, calculs, risques</span></div>
+              <div class="step-bar"><div class="step-fill" data-width="46"></div></div>
+              <div class="step-time"><span data-count="2">0</span> h<small>humain</small></div>
+            </div>
+            <div class="step-row">
+              <div><span class="step-name">Validation</span><span class="step-note">manager, finance, IT</span></div>
+              <div class="step-bar"><div class="step-fill" data-width="72"></div></div>
+              <div class="step-time"><span data-count="2">0</span> j<small>organisation</small></div>
+            </div>
+            <div class="step-row">
+              <div><span class="step-name">Deploiement</span><span class="step-note">process, droits, audit</span></div>
+              <div class="step-bar"><div class="step-fill" data-width="92"></div></div>
+              <div class="step-time"><span data-count="14">0</span> j<small>gouvernance</small></div>
+            </div>
+          </div>
+          <div class="bottleneck-summary">
+            <div class="summary-cell"><strong>x60</strong><span>Une analyse de 2 minutes peut demander 2 heures de verification.</span></div>
+            <div class="summary-cell"><strong>x24</strong><span>Une validation de 2 jours est 24 fois plus lente qu'une verification de 2 heures.</span></div>
+            <div class="summary-cell"><strong>Stop rules</strong><span>Seuils clairs: quand l'IA propose, quand elle agit, quand elle s'arrete.</span></div>
+          </div>
+          <p class="dashboard-caption">Ces chiffres sont des ordres de grandeur pedagogiques pour illustrer le goulot. Le message: plus les agents deviennent rapides, plus la gouvernance doit etre explicite.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="message">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Ce qu'il faut retenir</h2>
+        </div>
+        <div class="matrix">
+          <div class="cell">
+            <strong>1. Capacite</strong>
+            <span>Les modeles progressent vite: langage, code, image, outils, raisonnement, memoire et execution.</span>
+          </div>
+          <div class="cell">
+            <strong>2. Autonomie</strong>
+            <span>Le risque augmente quand l'IA agit sur des systemes, pas seulement quand elle repond a une question.</span>
+          </div>
+          <div class="cell">
+            <strong>3. Conscience</strong>
+            <span>Nous ne savons pas bien la mesurer. Mais pour l'entreprise, le sujet cle reste l'impact observable.</span>
+          </div>
+          <div class="cell">
+            <strong>4. Gouvernance</strong>
+            <span>Il faut tracer, limiter, superviser et valider. La vitesse des machines impose une discipline humaine.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Trois scenarios a presenter</h2>
+        </div>
+        <div class="scenario-list">
+          <div class="scenario"><strong>Scenario prudent</strong><span>Les IA restent des assistants puissants. Les gains sont massifs, mais la gouvernance humaine reste dominante.</span></div>
+          <div class="scenario"><strong>Scenario acceleration</strong><span>Les agents prennent en charge des processus entiers. Les entreprises gagnantes sont celles qui savent orchestrer et auditer.</span></div>
+          <div class="scenario"><strong>Scenario rupture</strong><span>Des systemes depassent les humains dans trop de domaines. Le sujet devient politique, militaire, philosophique et identitaire.</span></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-body">
+      <button class="close" id="close" aria-label="Fermer">X</button>
+      <h3 id="modalTitle"></h3>
+      <p id="modalText"></p>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById("modal");
+    const title = document.getElementById("modalTitle");
+    const text = document.getElementById("modalText");
+    const close = document.getElementById("close");
+    document.querySelectorAll(".event").forEach((event) => {
+      event.addEventListener("click", (e) => {
+        const target = e.target instanceof Element ? e.target : e.target.parentElement;
+        if (target && target.closest("a")) return;
+        title.textContent = event.dataset.title;
+        text.textContent = event.dataset.detail;
+        modal.classList.add("open");
+      });
+    });
+    document.querySelectorAll(".source-link").forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.stopPropagation();
+      });
+    });
+    close.addEventListener("click", () => modal.classList.remove("open"));
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) modal.classList.remove("open");
+    });
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") modal.classList.remove("open");
+    });
+
+    const animated = new Set();
+    const ease = (t) => 1 - Math.pow(1 - t, 3);
+
+    function animateNumber(el) {
+      const target = Number(el.dataset.count || "0");
+      const duration = target > 1000 ? 1600 : 1100;
+      const start = performance.now();
+      function tick(now) {
+        const progress = Math.min(1, (now - start) / duration);
+        const value = Math.round(target * ease(progress));
+        el.textContent = value.toLocaleString("fr-FR");
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting || animated.has(entry.target)) return;
+        animated.add(entry.target);
+        entry.target.querySelectorAll("[data-count]").forEach(animateNumber);
+        entry.target.querySelectorAll("[data-width]").forEach((el) => {
+          requestAnimationFrame(() => {
+            el.style.width = `${el.dataset.width}%`;
+          });
+        });
+        entry.target.querySelectorAll(".curve-path").forEach((path, index) => {
+          path.style.strokeDasharray = "100";
+          path.style.strokeDashoffset = "100";
+          path.style.transition = `stroke-dashoffset 1.6s ${index ? 0.25 : 0}s cubic-bezier(.2,.8,.2,1)`;
+          requestAnimationFrame(() => {
+            path.style.strokeDashoffset = "0";
+          });
+        });
+      });
+    }, { threshold: 0.35 });
+
+    document.querySelectorAll(".projection").forEach((section) => observer.observe(section));
+  </script>
+</body>
+</html>
