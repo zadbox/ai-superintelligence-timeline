@@ -534,6 +534,114 @@
 
     .sources a { color: var(--ink); text-decoration-color: rgba(247,241,231,0.28); }
 
+    .visual-feature {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr);
+      gap: 42px;
+      align-items: center;
+    }
+
+    .visual-media {
+      margin: 0;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      overflow: hidden;
+    }
+
+    .visual-media img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+    }
+
+    .visual-media figcaption {
+      padding: 10px 15px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.35;
+    }
+
+    .visual-copy h2 { margin-bottom: 22px; }
+    .visual-copy p:not(.eyebrow) {
+      color: var(--muted);
+      font-size: 19px;
+      line-height: 1.5;
+    }
+
+    .key-line {
+      display: block;
+      margin: 28px 0 4px;
+      padding-left: 16px;
+      border-left: 3px solid var(--amber);
+      font-size: 21px;
+      font-weight: 800;
+      line-height: 1.3;
+    }
+
+    .mini-stats, .constraint-grid, .market-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .mini-stats { grid-template-columns: repeat(3, 1fr); margin-top: 38px; }
+    .constraint-grid { grid-template-columns: repeat(4, 1fr); margin-top: 36px; }
+    .market-grid { grid-template-columns: repeat(3, 1fr); margin-top: 36px; }
+
+    .mini-stat, .constraint, .market-day {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      padding: 22px;
+      min-height: 148px;
+    }
+
+    .mini-stat strong, .market-day strong {
+      display: block;
+      color: var(--ink);
+      font-size: clamp(28px, 3.5vw, 46px);
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .mini-stat span, .constraint span, .market-day span {
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .market-day span { display: block; min-height: 3em; }
+    .market-day .source-link { margin-top: 14px; }
+
+    .constraint strong {
+      display: block;
+      color: var(--ink);
+      font-size: 21px;
+      margin-bottom: 12px;
+    }
+
+    .market-day:nth-child(1) strong { color: var(--red); }
+    .market-day:nth-child(n+2) strong { color: var(--green); }
+    .market-day small {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      margin-bottom: 14px;
+    }
+
+    .discussion-prompt {
+      margin-top: 38px;
+      padding: 22px 26px;
+      border: 1px solid rgba(240,184,79,.55);
+      color: var(--ink);
+      font-size: clamp(19px, 2vw, 25px);
+      font-weight: 750;
+      line-height: 1.4;
+    }
+
+    .projection-event .year, .projection-event h3 { color: var(--amber); }
+    .projection-event::before { background: var(--amber); }
+
     .modal {
       position: fixed;
       inset: 0;
@@ -573,13 +681,24 @@
 
     @media (max-width: 860px) {
       .section-head,
-      .projection { grid-template-columns: 1fr; }
+      .projection,
+      .visual-feature { grid-template-columns: 1fr; }
       .facts,
       .matrix,
       .sources { grid-template-columns: 1fr; }
+      .mini-stats,
+      .constraint-grid,
+      .market-grid { grid-template-columns: repeat(2, 1fr); }
       .event { grid-template-columns: 1fr; gap: 10px; }
       .tag { justify-self: start; }
       section { padding: 64px 0; }
+    }
+
+    @media (max-width: 560px) {
+      .mini-stats,
+      .constraint-grid,
+      .market-grid { grid-template-columns: 1fr; }
+      .mini-stat, .constraint, .market-day { min-height: 0; }
     }
   </style>
 </head>
@@ -587,9 +706,10 @@
   <header class="hero">
     <div>
       <h1>Timeline Intelligence Artificielle</h1>
-      <p class="hero-copy">Du premier choc des GANs en 2014 a GPT-5, aux agents autonomes, a la super-intelligence et a l'horizon de singularite 2045.</p>
+      <p class="hero-copy">Des GANs aux agents : les avancees observees, les limites physiques et les scenarios AGI ou super-intelligence. Une frise pour discuter, sans confondre faits et projections.</p>
       <div class="hero-actions">
         <a class="btn" href="#timeline">Voir la projection</a>
+        <a class="btn" href="#science">Science, puces et energie</a>
         <a class="btn" href="#message">Message a presenter</a>
       </div>
     </div>
@@ -612,8 +732,8 @@
             <p>Transformers, BERT, GPT, CLIP, ChatGPT et GPT-4o font converger texte, image, voix, code et raisonnement.</p>
           </div>
           <div class="fact">
-            <strong>2025-2045: agir</strong>
-            <p>GPT-5 et les agents changent le sujet: l'IA ne repond plus seulement, elle planifie, execute et peut devenir une infrastructure de decision.</p>
+            <strong>2025-2026 : agir</strong>
+            <p>Les agents utilisent des outils et enchainent des taches. Au-dela, AGI et super-intelligence restent des scenarios a discuter.</p>
           </div>
         </div>
       </div>
@@ -623,7 +743,7 @@
       <div class="wrap">
         <div class="section-head">
           <h2>Timeline: 2014 a 2045</h2>
-          <p class="lead">La premiere partie est historique et verifiable. La seconde partie est une projection: utile pour reflechir, mais a presenter comme scenario, pas comme certitude.</p>
+          <p class="lead">La premiere partie retrace des avancees observees. Les jalons AGI 2027 et singularite 2045 sont des scenarios de discussion, pas des dates etablies. En 2026, aucun consensus public ne permet d'affirmer que l'AGI ou l'ASI sont atteintes. <a href="https://hai.stanford.edu/ai-index/2026-ai-index-report" target="_blank" rel="noreferrer">Voir l'AI Index 2026</a>.</p>
         </div>
         <div class="timeline">
           <article class="event" data-title="2014 - GANs" data-detail="Les GANs introduisent une idee simple et puissante: deux reseaux s'affrontent. Le generateur tente de produire du contenu credible, le discriminateur tente de detecter le faux. Cette dynamique lance une nouvelle etape dans la generation d'images et de contenu artificiel.">
@@ -738,24 +858,24 @@
           <article class="event" data-title="2026 - Agents autonomes specialises" data-detail="Projection: les agents deviennent specialises par secteur. Ils coordonnent des taches, utilisent des outils, consultent des fichiers et produisent des livrables. Pour l'entreprise, l'enjeu devient l'orchestration et l'audit.">
             <div class="year">2026</div>
             <div>
-              <h3>Agents autonomes specialises</h3>
-              <p>Deploiement massif d'agents IA specialises par secteur, avec coordination automatique et collaboration inter-agents.</p>
+              <h3>Agents specialises</h3>
+              <p>Des agents commencent a consulter des fichiers, utiliser des outils et produire des livrables. Leur fiabilite doit etre mesuree cas par cas.</p>
               <div class="chips"><span class="chip">Agents sectoriels</span><span class="chip">Orchestration multi-agents</span><span class="chip">Apprentissage continu</span><span class="chip">Integration SI</span></div>
               <a class="source-link" href="https://darioamodei.com/essay/machines-of-loving-grace" target="_blank" rel="noreferrer">Projection "powerful AI" -> Dario Amodei</a>
             </div>
             <span class="tag">AGT</span>
           </article>
-          <article class="event" data-title="2027 - AGI pratique" data-detail="Projection: on ne parle pas necessairement d'une AGI philosophique, mais d'une AGI pratique: des systemes equivalents a des experts humains dans beaucoup de taches intellectuelles. Le point critique devient la responsabilite: qui valide les decisions ?">
+          <article class="event projection-event" data-title="2027 - scenario d'AGI pratique" data-detail="Scenario prospectif du lien partage, non une prevision etablie. On parle d'une hypothese de systemes proches d'experts humains dans beaucoup de taches intellectuelles. Le point critique devient la responsabilite: qui valide les decisions ?">
             <div class="year">2027</div>
             <div>
-              <h3>Transition vers l'AGI pratique</h3>
-              <p>Capacites cognitives proches d'experts humains dans de nombreuses taches intellectuelles, avec adaptation contextuelle et innovation assistee.</p>
+              <h3>Scenario : AGI pratique ?</h3>
+              <p>Hypothese d'une competence generale et robuste dans de nombreuses taches intellectuelles. Aucun consensus public ne permet de fixer cette date.</p>
               <div class="chips"><span class="chip">Expertise multi-domaines</span><span class="chip">Innovation autonome</span><span class="chip">Adaptation contextuelle</span><span class="chip">Impact transformationnel</span></div>
               <a class="source-link" href="https://www.anthropic.com/research/alignment-faking" target="_blank" rel="noreferrer">Risque a surveiller -> alignment faking</a>
             </div>
-            <span class="tag">AGI</span>
+            <span class="tag">SCENARIO</span>
           </article>
-          <article class="event" data-title="2045 - Singularite selon Kurzweil" data-detail="Ray Kurzweil popularise 2045 comme horizon possible de singularite. A presenter comme une hypothese prospective: fusion homme-machine, intelligence non biologique amplifiee, rupture progressive ou invisible.">
+          <article class="event projection-event" data-title="2045 - scenario de singularite" data-detail="Ray Kurzweil popularise 2045 comme horizon possible de singularite. Il s'agit d'une hypothese prospective, sans calendrier scientifique etabli.">
             <div class="year">2045</div>
             <div>
               <h3>Singularite: rupture ou processus invisible ?</h3>
@@ -767,6 +887,76 @@
             <span class="tag">HORIZON</span>
           </article>
         </div>
+      </div>
+    </section>
+
+    <section id="science">
+      <div class="wrap">
+        <div class="visual-feature">
+          <figure class="visual-media">
+            <img src="assets/navier-stokes.webp" alt="Illustration de vagues et de tourbillons representant la dynamique des fluides" loading="lazy" />
+            <figcaption>Illustration generee pour cette presentation ; elle ne represente pas une preuve mathematique.</figcaption>
+          </figure>
+          <div class="visual-copy">
+            <p class="eyebrow">Frontiere scientifique</p>
+            <h2>Des percees, et des questions toujours ouvertes.</h2>
+            <p>Les modeles d'IA atteignent des niveaux remarquables dans certaines competitions mathematiques. Cela ne suffit pas a etablir qu'ils resolvent seuls les grands problemes de recherche.</p>
+            <span class="key-line">Navier-Stokes : annonce majeure en 2026, validation scientifique encore en cours.</span>
+            <a class="source-link" href="https://www.claymath.org/news/navier-stokes-announcement/" target="_blank" rel="noreferrer">Lire l'annonce du Clay Mathematics Institute</a>
+          </div>
+        </div>
+        <div class="mini-stats" aria-label="Statut des sept problemes du millenaire">
+          <div class="mini-stat"><strong>1</strong><span>probleme resolu : Poincare</span></div>
+          <div class="mini-stat"><strong>1</strong><span>preuve annoncee, encore evaluee : Navier-Stokes</span></div>
+          <div class="mini-stat"><strong>5</strong><span>autres problemes toujours ouverts</span></div>
+        </div>
+        <a class="source-link" href="https://www.claymath.org/millennium-problems/" target="_blank" rel="noreferrer">Statut officiel des sept problemes du millenaire</a>
+        <a class="source-link" href="https://deepmind.google/blog/accelerating-mathematical-and-scientific-discovery-with-gemini-deep-think/" target="_blank" rel="noreferrer">Exemple de progres de l'IA en mathematiques</a>
+      </div>
+    </section>
+
+    <section id="infrastructure">
+      <div class="wrap">
+        <div class="visual-feature">
+          <div class="visual-copy">
+            <p class="eyebrow">La limite physique</p>
+            <h2>Une IA plus forte demande aussi une infrastructure plus forte.</h2>
+            <p>Les superclusters relient des milliers de puces. Leur progression depend des reseaux, de la memoire, de l'electricite et du refroidissement autant que des algorithmes.</p>
+            <span class="key-line">La question n'est plus seulement « quel modele ? », mais « avec quelles ressources ? »</span>
+          </div>
+          <figure class="visual-media">
+            <img src="assets/ai-infrastructure.webp" alt="Illustration de serveurs de calcul IA, de refroidissement et de lignes electriques" loading="lazy" />
+            <figcaption>Illustration generee pour cette presentation, et non photographie d'un site reel.</figcaption>
+          </figure>
+        </div>
+        <div class="constraint-grid">
+          <div class="constraint"><strong>Puces</strong><span>Fabrication et memoire avancee.</span></div>
+          <div class="constraint"><strong>Superclusters</strong><span>Assemblage et reseaux rapides.</span></div>
+          <div class="constraint"><strong>Electricite</strong><span>Puissance disponible et raccordement.</span></div>
+          <div class="constraint"><strong>Territoires</strong><span>Eau, permis et acceptabilite locale.</span></div>
+        </div>
+        <div class="discussion-prompt">Repere AIE : environ 485 TWh consommes par les centres de donnees en 2025, contre environ 950 TWh projetes en 2030 dans son scenario central. La trajectoire reste incertaine.</div>
+        <a class="source-link" href="https://www.iea.org/reports/key-questions-on-energy-and-ai/executive-summary" target="_blank" rel="noreferrer">AIE : energie, puces et incertitudes</a>
+        <a class="source-link" href="https://www.iea.org/reports/powering-artificial-intelligence/executive-summary" target="_blank" rel="noreferrer">AIE : reseaux et centres de donnees</a>
+        <a class="source-link" href="https://nvidianews.nvidia.com/news/spectrum-x-ethernet-networking-xai-colossus/" target="_blank" rel="noreferrer">Exemple de supercluster</a>
+      </div>
+    </section>
+
+    <section id="marche">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Marche</p>
+            <h2>Bulle IA ou correction de marche ?</h2>
+          </div>
+          <p class="lead">Au 12 novembre 2026, les valeurs liees a l'IA ont subi une forte baisse, puis des rebonds. Cette volatilite interroge les prix et les attentes ; elle ne tranche pas a elle seule l'utilite de la technologie.</p>
+        </div>
+        <div class="market-grid" aria-label="Trois seances de marche en novembre 2026">
+          <div class="market-day"><small>5 NOVEMBRE</small><strong>-5,5 %</strong><span>Nasdaq : forte vente des valeurs technologiques.</span><a class="source-link" href="https://apnews.com/article/f1e19f47b21ec9dc57d0c4929b29b002" target="_blank" rel="noreferrer">Source AP</a></div>
+          <div class="market-day"><small>9 NOVEMBRE</small><strong>+2,7 %</strong><span>Nasdaq : rebond apres la semaine de baisse.</span><a class="source-link" href="https://apnews.com/article/d938f8e6ff42b3706e1d36e6245ec56b" target="_blank" rel="noreferrer">Source AP</a></div>
+          <div class="market-day"><small>11 NOVEMBRE</small><strong>+1,6 %</strong><span>Nasdaq : nouveau rebond porte par la tech.</span><a class="source-link" href="https://apnews.com/article/027cd5f4583d1a11c1795150bf065afb" target="_blank" rel="noreferrer">Source AP</a></div>
+        </div>
+        <div class="discussion-prompt">Pour la discussion : une correction des valorisations signifie-t-elle la fin de l'IA, ou une nouvelle exigence de preuves economiques ?</div>
       </div>
     </section>
 
