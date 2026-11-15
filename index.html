@@ -739,6 +739,32 @@
       </div>
     </section>
 
+    <section id="familles">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Avant la frise</p>
+            <h2>Deux familles d'IA, plus un mode d'usage</h2>
+          </div>
+          <p class="lead">L'IA agentique n'est pas une troisième famille de modèles : c'est une façon d'utiliser un modèle génératif, avec des outils, une boucle et un objectif.</p>
+        </div>
+        <div class="facts">
+          <div class="fact">
+            <strong>IA discriminative</strong>
+            <p>Elle classe ou prédit à partir de données : p(y|x). Exemples : détection de fraude, scoring, détection d'anomalies, régression, XGBoost.</p>
+          </div>
+          <div class="fact">
+            <strong>IA générative</strong>
+            <p>Elle produit un contenu nouveau : p(x). Un LLM prédit le mot suivant ; un modèle de diffusion génère une image. Exemples : Claude, ChatGPT, Gemini.</p>
+          </div>
+          <div class="fact">
+            <strong>Mode agentique</strong>
+            <p>Un modèle génératif qui planifie, appelle des outils (fichiers, code, API), lit le résultat et recommence jusqu'à l'objectif. Il peut lui-même appeler un modèle discriminatif ou un script.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section id="timeline">
       <div class="wrap">
         <div class="section-head">
@@ -901,15 +927,19 @@
             <p class="eyebrow">Frontiere scientifique</p>
             <h2>Des percees, et des questions toujours ouvertes.</h2>
             <p>Les modeles d'IA atteignent des niveaux remarquables dans certaines competitions mathematiques. Cela ne suffit pas a etablir qu'ils resolvent seuls les grands problemes de recherche.</p>
-            <span class="key-line">Navier-Stokes : annonce majeure en 2026, validation scientifique encore en cours.</span>
+            <p>Le 8 septembre 2026, OpenAI a publié une preuve annoncée, formalisée en Lean : une explosion des solutions en temps fini, donc une réponse négative plutôt qu'une preuve de régularité. Le 11 septembre, le Clay Mathematics Institute a indiqué que le problème « a apparemment été réglé » et que son évaluation se poursuit, sans précipitation.</p>
+            <span class="key-line">Navier-Stokes : une annonce majeure, pas encore une preuve validée ni un prix attribué.</span>
             <a class="source-link" href="https://www.claymath.org/news/navier-stokes-announcement/" target="_blank" rel="noreferrer">Lire l'annonce du Clay Mathematics Institute</a>
+            <a class="source-link" href="https://www.datacamp.com/blog/openai-navier-stokes-math-problem" target="_blank" rel="noreferrer">Ce qu'OpenAI affirme exactement (DataCamp)</a>
           </div>
         </div>
         <div class="mini-stats" aria-label="Statut des sept problemes du millenaire">
           <div class="mini-stat"><strong>1</strong><span>probleme resolu : Poincare</span></div>
-          <div class="mini-stat"><strong>1</strong><span>preuve annoncee, encore evaluee : Navier-Stokes</span></div>
+          <div class="mini-stat"><strong>1</strong><span>preuve annoncée par OpenAI, en cours d'évaluation : Navier-Stokes</span></div>
           <div class="mini-stat"><strong>5</strong><span>autres problemes toujours ouverts</span></div>
         </div>
+        <div class="discussion-prompt">Problèmes d'Erdős : Epoch AI a réuni 68 problèmes encore ouverts en août 2026. Lors de son test officiel, les meilleurs modèles n'en ont résolu qu'une poignée. Depuis, 17 ont été résolus par des humains ou par l'IA, dont 12 attribués à la publication d'OpenAI du 6 octobre 2026 (plus de 700 preuves).</div>
+        <a class="source-link" href="https://epoch.ai/benchmarks/frontiermath-erdos" target="_blank" rel="noreferrer">Epoch AI : FrontierMath Erdős</a>
         <a class="source-link" href="https://www.claymath.org/millennium-problems/" target="_blank" rel="noreferrer">Statut officiel des sept problemes du millenaire</a>
         <a class="source-link" href="https://deepmind.google/blog/accelerating-mathematical-and-scientific-discovery-with-gemini-deep-think/" target="_blank" rel="noreferrer">Exemple de progres de l'IA en mathematiques</a>
       </div>
@@ -922,6 +952,7 @@
             <p class="eyebrow">La limite physique</p>
             <h2>Une IA plus forte demande aussi une infrastructure plus forte.</h2>
             <p>Les superclusters relient des milliers de puces. Leur progression depend des reseaux, de la memoire, de l'electricite et du refroidissement autant que des algorithmes.</p>
+            <p>À côté des grands clouds (AWS, Azure, Google), des « neoclouds » spécialisés dans la location de GPU, comme CoreWeave, Nebius ou Crusoe, construisent leurs propres centres de données. Leur accès à l'électricité devient un facteur décisif.</p>
             <span class="key-line">La question n'est plus seulement « quel modele ? », mais « avec quelles ressources ? »</span>
           </div>
           <figure class="visual-media">
@@ -936,6 +967,8 @@
           <div class="constraint"><strong>Territoires</strong><span>Eau, permis et acceptabilite locale.</span></div>
         </div>
         <div class="discussion-prompt">Repere AIE : environ 485 TWh consommes par les centres de donnees en 2025, contre environ 950 TWh projetes en 2030 dans son scenario central. La trajectoire reste incertaine.</div>
+        <div class="discussion-prompt">Le 22 juillet 2026, une ligne de 230 kV a été retirée du réseau en Virginie du Nord. Environ 3 800 MW de centres de données se sont alors déconnectés en deux vagues (2 970 MW, puis 1 099 MW) et sont passés sur leurs groupes de secours. C'est le plus gros événement de ce type de l'histoire de PJM. Le réseau a tenu, mais tension et fréquence ont fortement varié ; des règles de maintien en service sont en préparation.</div>
+        <a class="source-link" href="https://insidelines.pjm.com/pjm-dominion-review-large-load-transfer-event/" target="_blank" rel="noreferrer">PJM : analyse de l'événement du 22 juillet 2026</a>
         <a class="source-link" href="https://www.iea.org/reports/key-questions-on-energy-and-ai/executive-summary" target="_blank" rel="noreferrer">AIE : energie, puces et incertitudes</a>
         <a class="source-link" href="https://www.iea.org/reports/powering-artificial-intelligence/executive-summary" target="_blank" rel="noreferrer">AIE : reseaux et centres de donnees</a>
         <a class="source-link" href="https://nvidianews.nvidia.com/news/spectrum-x-ethernet-networking-xai-colossus/" target="_blank" rel="noreferrer">Exemple de supercluster</a>
@@ -955,6 +988,13 @@
           <div class="market-day"><small>5 NOVEMBRE</small><strong>-5,5 %</strong><span>Nasdaq : forte vente des valeurs technologiques.</span><a class="source-link" href="https://apnews.com/article/f1e19f47b21ec9dc57d0c4929b29b002" target="_blank" rel="noreferrer">Source AP</a></div>
           <div class="market-day"><small>9 NOVEMBRE</small><strong>+2,7 %</strong><span>Nasdaq : rebond apres la semaine de baisse.</span><a class="source-link" href="https://apnews.com/article/d938f8e6ff42b3706e1d36e6245ec56b" target="_blank" rel="noreferrer">Source AP</a></div>
           <div class="market-day"><small>11 NOVEMBRE</small><strong>+1,6 %</strong><span>Nasdaq : nouveau rebond porte par la tech.</span><a class="source-link" href="https://apnews.com/article/027cd5f4583d1a11c1795150bf065afb" target="_blank" rel="noreferrer">Source AP</a></div>
+        </div>
+        <p class="eyebrow" style="margin-top:38px">Arguments avancés dans le débat</p>
+        <div class="constraint-grid" aria-label="Arguments avancés sur une possible bulle">
+          <div class="constraint"><strong>Investissements</strong><span>Des dépenses en centres de données qui progressent plus vite que les revenus de l'IA.</span></div>
+          <div class="constraint"><strong>Financement circulaire</strong><span>Un fournisseur finance son client, qui lui achète ensuite des puces ou du calcul.</span></div>
+          <div class="constraint"><strong>Dette</strong><span>Des neoclouds qui financent leurs centres de données à crédit.</span></div>
+          <div class="constraint"><strong>Concentration</strong><span>Une part importante du marché portée par quelques valeurs.</span></div>
         </div>
         <div class="discussion-prompt">Pour la discussion : une correction des valorisations signifie-t-elle la fin de l'IA, ou une nouvelle exigence de preuves economiques ?</div>
       </div>
